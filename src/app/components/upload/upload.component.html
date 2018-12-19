@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-4">
     <h4>Select images</h4>
-    <div (mouseOver)="isOverElement == $event" appNgDropFiles class="well drop-zone" [ngClass]="{'file-over': isOverElement}">
+    <div (mouseOver)="isOverElement = $event" appNgDropFiles class="well drop-zone" [ngClass]="{'file-over': isOverElement}">
       <h4>Leave here yor images</h4>
       <img src="assets/images/drop-images.png" alt="xxx">
     </div>
