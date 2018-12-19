@@ -1,14 +1,15 @@
 <div class="row">
   <div class="col-4">
     <h4>Select images</h4>
-    <div (mouseOver)="isOverElement = $event" appNgDropFiles class="well drop-zone" [ngClass]="{'file-over': isOverElement}">
+    <div (mouseOver)="isOverElement = $event" appNgDropFiles [archives]="archives"
+     class="well drop-zone" [ngClass]="{'file-over': isOverElement}">
       <h4>Leave here yor images</h4>
       <img src="assets/images/drop-images.png" alt="xxx">
     </div>
   </div>
   <div class="col-8">
     <button class="btn btn-primary" (click)="uploadImages()" [disabled]="archives.length === 0">Upload to Fire Store</button>&nbsp;
-    <button class="btn btn-danger">Clear All</button>
+    <button class="btn btn-danger" (click)="cleanImages()">Clear All</button>
 
     <table class="table table-striped table-dark">
       <thead>
@@ -19,12 +20,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>xxx</th>
-          <td>56 mb</td>
+        <tr *ngFor="let arch of archives">
+          <th [ngClass]="{'text-green': arch.progress >= 100}">{{ arch.archiveName }}</th>
+          <td>{{ arch.myArchive.size /1024 /1024 | number: '.2-2' }} MB</td>
           <td width="50%">
             <div class="progress">
-              <div class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+              <div class="progress-bar bg-success progress-bar-striped" role="progressbar"
+                [ngStyle]="{'width': arch.progress + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ arch.progress }}</div>
             </div>
           </td>
         </tr>
